@@ -1,9 +1,17 @@
 var express = require('express');
+var fs = require('fs');
+var infile = "index.html";
+var buf;
+
+  fs.readFile(infile, function (err, data) {
+    if (err) throw err;
+    buf = new Buffer(data);
+  });
 
 var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
-  response.send('Hello World 2!');
+  response.send(buf.toString());
 });
 
 
